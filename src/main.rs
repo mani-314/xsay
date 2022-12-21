@@ -35,15 +35,15 @@ fn bubble(input: &str) -> String  {
     //Text
     for(i, line) in lines.into_iter().enumerate(){
         if num_lines == 1{
-            out = out + "<"+ line + ">\n";
+            out = out + "< "+ line + &(" ".repeat(line_width-line.len())) + " >\n";
 
         }else if i == 0 {
-            out = out + "/"+ line + "\\\n";
+            out = out + "/ "+ line + &(" ".repeat(line_width-line.len())) + " \\\n";
         }else if i == num_lines -1 {
-            out = out + "\\"+ line + "/\n";
+            out = out + "\\ "+ line + &(" ".repeat(line_width-line.len())) + "  /\n";
         }
         else {
-            out = out + "|"+ line + "|\n";
+            out = out + "| "+ line + &(" ".repeat(line_width-line.len())) + " |\n";
         }
     }
     out = out + &("-".repeat(line_width+2));
