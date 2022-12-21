@@ -1,7 +1,6 @@
 use std::env;
 use std::fs;
 use textwrap::fill;
-//use unicode_width::UnicodeWidthStr;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
