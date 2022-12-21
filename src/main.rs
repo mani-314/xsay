@@ -1,5 +1,7 @@
 use std::env;
 use std::fs;
+use textwrap::fill;
+//use unicode_width::UnicodeWidthStr;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -12,11 +14,50 @@ fn main() {
     let asciiart = fs::read_to_string(path_abs)
         .expect("Should have been able to read file");
     
-    println!("{}",speechbubblecreator(text.to_string()));
+    println!("{}",bubble(text));
     println!("{}",asciiart);
 }
 
-fn speechbubblecreator(input: String) -> String  {
-    let out = input.to_owned() + "\n   \\ \n    \\";
+
+fn bubble(input: &str) -> String  {
+    let dashes= "\n   \\ \n    \\";
+    let line_limit = 50;
+
+    let wrapped = fill(input, line_limit);
+    let lines: Vec<&str> = wrapped.lines().collect();
+
+    let num_lines = lines.len();
+    let line_width = widest_line(&lines);
+
+    //Top Border
+    let mut out = "_".repeat(line_width+2)+"\n";
+
+    //Text
+    for(i, line) in lines.into_iter().enumerate(){
+        if num_lines == 1{
+            out = out + "<"+ line + ">\n";
+
+        }else if i == 0 {
+            out = out + "/"+ line + "\\\n";
+        }else if i == num_lines -1 {
+            out = out + "\\"+ line + "/\n";
+        }
+        else {
+            out = out + "|"+ line + "|\n";
+        }
+    }
+    out = out + &("-".repeat(line_width+2));
+    out = out + dashes;
+
     return out;
+}
+
+fn widest_line(lines: &[&str]) -> usize{
+    let mut wideboy = lines[0].len();
+    for line in lines{
+        if line.len() > wideboy{
+            wideboy = line.len();
+        }
+    }
+    return wideboy;
 }
