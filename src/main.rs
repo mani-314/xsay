@@ -30,12 +30,13 @@ fn bubble(input: &str) -> String  {
     let line_width = widest_line(&lines);
 
     //Top Border
-    let mut out = "_".repeat(line_width+2)+"\n";
+    let mut out: String = " ".to_string();
+    out = out + &("_".repeat(line_width+2))+" \n";
 
     //Text
     for(i, line) in lines.into_iter().enumerate(){
         if num_lines == 1{
-            out = out + "< "+ line + &(" ".repeat(line_width-line.len())) + " >\n";
+            out = out + "< "+ line + " >\n";
 
         }else if i == 0 {
             out = out + "/ "+ line + &(" ".repeat(line_width-line.len())) + " \\\n";
@@ -46,7 +47,7 @@ fn bubble(input: &str) -> String  {
             out = out + "| "+ line + &(" ".repeat(line_width-line.len())) + " |\n";
         }
     }
-    out = out + &("-".repeat(line_width+2));
+    out = out + " " + &("-".repeat(line_width+2));
     out = out + dashes;
 
     return out;
