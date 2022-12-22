@@ -40,7 +40,7 @@ fn bubble(input: &str) -> String  {
         }else if i == 0 {
             out = out + "/ "+ line + &(" ".repeat(line_width-line.len())) + " \\\n";
         }else if i == num_lines -1 {
-            out = out + "\\ "+ line + &(" ".repeat(line_width-line.len())) + "  /\n";
+            out = out + "\\ "+ line + &(" ".repeat(line_width-line.len())) + " /\n";
         }
         else {
             out = out + "| "+ line + &(" ".repeat(line_width-line.len())) + " |\n";
