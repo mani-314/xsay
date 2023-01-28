@@ -29,4 +29,5 @@ name = "xsay"
 version = "0.1.0"
 dependencies = [
  "textwrap",
+ "unicode-width",
 ]

@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 textwrap = "0.13"
+unicode-width ="0.1.1"
