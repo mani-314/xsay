@@ -28,7 +28,7 @@ fn bubble(input: &str) -> String {
     let line_width = widest_line(&lines);
 
     //Top Border
-    let mut out: String = " ".to_string();
+    let mut out = String::from(" ");
     out = out + &("_".repeat(line_width + 2)) + " \n";
 
     //Text
