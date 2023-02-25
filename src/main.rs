@@ -6,7 +6,7 @@ use unicode_width::UnicodeWidthStr;
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    let path = "asciiart/"; //planned to be changeable via "--setpath" flag
+    let path = "asciiart/"; //planned to be changeable via "--path/-p" flag
     let file = &args[1];
     let text = &args[2];
     let path_abs = path.to_owned() + &file + ".txt";
