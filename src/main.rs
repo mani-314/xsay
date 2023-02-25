@@ -8,16 +8,24 @@ fn main() {
 
     let path = "asciiart/"; //planned to be changeable via "--path/-p" flag
     let file = &args[1];
-    let text = &args[2];
+    let text = maketext(&args[2..]);
     let path_abs = path.to_owned() + &file + ".txt";
 
     let asciiart = fs::read_to_string(path_abs).expect("Should have been able to read file");
 
-    println!("{}", bubble(text));
+    println!("{}", bubble(&text));
     println!("{}", asciiart);
 }
 
-fn bubble(input: &str) -> String {
+fn maketext(args: &[String]) -> String {
+    let mut text = String::from("");
+    for arg in args.into_iter() {
+        text = text + arg + " ";
+    }
+    return text;
+}
+
+fn bubble(input: &String) -> String {
     let dashes = "\n   \\ \n    \\";
     let line_limit = 50;
 
