@@ -6,10 +6,10 @@ use unicode_width::UnicodeWidthStr;
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    let path = "asciiart/"; //planned to be changeable via "--path/-p" flag
+    let path = String::from("asciiart/"); //planned to be changeable via "--path/-p" flag
     let file = &args[1];
     let text = maketext(&args[2..]);
-    let path_abs = path.to_owned() + &file + ".txt";
+    let path_abs = path + &file + ".txt";
 
     let asciiart = fs::read_to_string(path_abs).expect("Should have been able to read file");
 
