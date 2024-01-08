@@ -1,10 +1,14 @@
 # XSAY 
 xsay is a cowsay-like applet with costumisable ascii art.
-## Roadmap
-- [x] Multiline speechbubble
-- [ ] Absolute path for *asciiart* folder
-- [ ] Flag to change *asciiart* folder path
-- [ ] Package & relaese
+
+## Usage
+```shell
+xsay <ascii art file> your text here
+```
+For example
+```shell
+xsay tux Hello, this is xsay
+```
 ~~~
  _____________________
 < Hello, this is xsay >
