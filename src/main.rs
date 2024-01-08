@@ -1,13 +1,21 @@
 mod lib;
-use std::process;
 use std::env;
 use std::fs;
 use std::path::PathBuf;
+use std::process;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
 
+    if args.len() <= 2 || args[1].eq("-h") {
+        println!(
+            "Usage: 'xsay <asciiart-file> your text here'.\nAsciiart files must be located at '$HOME/.config/xsay/asciiart/<file>'"
+        );
+        process::exit(0);
+    }
+
     let file = &args[1];
+
     if let Some(home_dir) = env::var_os("HOME") {
         let path = PathBuf::from(home_dir);
         let config_path = path.join(".config/xsay/asciiart");
@@ -19,7 +27,7 @@ fn main() {
                 println!("{}", asciiart);
             }
             Err(err) => {
-                eprintln!("Error reading file: {}",err);
+                eprintln!("Error reading file: {} \n asciiart files must be located at '$HOME/.config/xsay/asciiart/<file>'", err);
                 process::exit(1);
             }
         }
