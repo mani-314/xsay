@@ -1,18 +1,30 @@
 mod lib;
+use std::process;
 use std::env;
 use std::fs;
-use std::path::Path;
+use std::path::PathBuf;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    let path = Path::new("~/.config/xsay/asciiart/tux.txt");
     let file = &args[1];
-    let text = lib::maketext(&args[2..]);
-    // let path_abs = path + &file + ".txt";
-    // println!("{}", path_abs);
-    let asciiart = fs::read_to_string(path).expect("Should have been able to read file");
-
-    println!("{}", lib::bubble(&text));
-    println!("{}", asciiart);
+    if let Some(home_dir) = env::var_os("HOME") {
+        let path = PathBuf::from(home_dir);
+        let config_path = path.join(".config/xsay/asciiart");
+        let asciiart_path = config_path.join(file);
+        let text = lib::maketext(&args[2..]);
+        match fs::read_to_string(asciiart_path) {
+            Ok(asciiart) => {
+                println!("{}", lib::bubble(&text));
+                println!("{}", asciiart);
+            }
+            Err(err) => {
+                eprintln!("Error reading file: {}",err);
+                process::exit(1);
+            }
+        }
+    } else {
+        eprintln!("Path to home directory not found");
+        process::exit(1);
+    }
 }
