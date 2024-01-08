@@ -10,10 +10,10 @@ pub fn maketext(args: &[String]) -> String {
 }
 
 pub fn bubble(input: &String) -> String {
-    let dashes = "\n   \\ \n    \\";
-    let line_limit = 50;
+    const DASHES: &str = "\n   \\ \n    \\";
+    const LINE_LIMIT: usize = 50;
 
-    let wrapped = fill(input, line_limit);
+    let wrapped = fill(input, LINE_LIMIT);
     let lines: Vec<&str> = wrapped.lines().collect();
 
     let num_lines = lines.len();
@@ -21,7 +21,7 @@ pub fn bubble(input: &String) -> String {
 
     //Top Border
     let mut out = String::from(" ");
-    out = out + &("_".repeat(line_width + 2)) + " \n";
+    out = out + &("—".repeat(line_width + 2)) + " \n";
 
     //Text
     for (i, line) in lines.into_iter().enumerate() {
@@ -36,8 +36,11 @@ pub fn bubble(input: &String) -> String {
             out = out + "| " + line + &(" ".repeat(diff)) + " |\n";
         }
     }
-    out = out + " " + &("-".repeat(line_width + 2));
-    out = out + dashes;
+
+    //Bottom Border
+    out = out + " " + &("—".repeat(line_width + 2));
+    //Line to bubble
+    out = out + DASHES;
 
     return out;
 }
